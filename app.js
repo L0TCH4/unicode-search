@@ -198,7 +198,7 @@ const RG=[];
 function loadNames(){
   if (namesP) return namesP;
   return namesP=new Promise(res=>{
-    const sc=document.createElement('script'); sc.src='data/names.js';
+    const sc=document.createElement('script'); sc.src='names.js';
     sc.onload=()=>{
       NM=new Map();
       for (const line of window.UNAMES.split('\n')){
