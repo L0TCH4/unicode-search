@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Unicode 手書き検索</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Unicode手書き検索</h1>
+    <input id="q" type="search" placeholder="文字名・コードで検索 (例: arrow, U+2603)" aria-label="文字名またはコードで検索" autocomplete="off">
+    <button id="open-set" type="button">設定</button>
+  </header>
+  <main>
+    <section class="pad-col" aria-label="手書き入力">
+      <div class="pad-wrap"><canvas id="pad" width="400" height="400" aria-label="手書き入力エリア"></canvas></div>
+      <div class="row">
+        <button id="undo" type="button">1画戻す</button>
+        <button id="clear" type="button">消去</button>
+        <span id="status" class="status" role="status"></span>
+      </div>
+    </section>
+    <div id="results" aria-live="polite"></div>
+    <section id="detail" aria-label="選択した文字の情報"><p class="ph">候補の文字を選ぶと、名前やコードがここに表示されます。</p></section>
+  </main>
+</div>
+
+<dialog id="settings" aria-labelledby="set-title">
+  <div class="dlg-head"><h2 id="set-title">設定</h2><button id="close-set" type="button">閉じる</button></div>
+  <label>照合に使うフォント
+    <select id="font">
+      <option value="sans-serif">ゴシック体</option>
+      <option value="serif">明朝体</option>
+      <option value="custom">フォント名を指定</option>
+    </select>
+  </label>
+  <input id="customFont" placeholder="例: Noto Sans JP" hidden>
+  <p class="hint">端末のフォントで文字を描画して手書きと比べます。フォントに無い文字は検索対象から外れます。処理はすべてこの端末内で行われます。</p>
+  <div class="row presets"><button id="p-def" type="button">標準に戻す</button><button id="p-all" type="button">すべて選ぶ</button><button id="p-none" type="button">すべて外す</button></div>
+  <label class="toggle"><input type="checkbox" id="real"> 本物のブロック名(英語)で細かく表示する</label>
+  <div id="blocks" class="chips"></div>
+</dialog>
+
+<script src="data/blocks.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
